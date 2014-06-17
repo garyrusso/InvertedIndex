@@ -62,15 +62,22 @@ public class InvertedIndex {
 		}
 
 		int pos = 0;
+		//int lineNum = 0;
 		
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		
 		for (String line = reader.readLine(); line != null; line = reader.readLine())
 		{
+			//lineNum++;
+			//System.out.println("");
+			//System.out.println(lineNum + ". " + line);
+			
 			for (String _word : line.split("\\W+"))
 			{
 				String word = _word.toLowerCase();
 				pos++;
+				
+				//System.out.println(_word);
 				
 				if (stopwords.contains(word))
 					continue;
@@ -107,10 +114,12 @@ public class InvertedIndex {
 			}
 			
 			System.out.print(word);
+			
 			for (String f : answer)
 			{
 				System.out.print(" " + f);
 			}
+			
 			System.out.println("");
 		}
 	}
@@ -121,8 +130,9 @@ public class InvertedIndex {
 		{
 			InvertedIndex idx = new InvertedIndex();
 			
-			for (int i = 1; i < args.length; i++)
+			for (int i = 0; i < args.length; i++)
 			{
+				//System.out.println(i + ". " + args[i]);
 				idx.indexFile(new File(args[i]));
 			}
 			
