@@ -62,15 +62,15 @@ public class InvertedIndex {
 		}
 
 		int pos = 0;
-		//int lineNum = 0;
+		int lineNum = 0;
 		
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		
 		for (String line = reader.readLine(); line != null; line = reader.readLine())
 		{
-			//lineNum++;
-			//System.out.println("");
-			//System.out.println(lineNum + ". " + line);
+			lineNum++;
+			System.out.println("");
+			System.out.println(lineNum + ". " + line);
 			
 			for (String _word : line.split("\\W+"))
 			{
@@ -104,11 +104,13 @@ public class InvertedIndex {
 			Set<String> answer = new HashSet<String>();
 			String word = _word.toLowerCase();
 			List<Tuple> idx = index.get(word);
+			System.out.println("...word: " + word);
 			
 			if (idx != null)
 			{
 				for (Tuple t : idx)
 				{
+					System.out.println("word: " + _word + " | position: " + t.position + " | fileno: " + t.fileno);
 					answer.add(files.get(t.fileno));
 				}
 			}
@@ -124,13 +126,16 @@ public class InvertedIndex {
 		}
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args1)
 	{
+		//String[] args = {"333", "C:/projects/knewton/docs/test1.txt", "C:/projects/knewton/docs/test2.txt" };
+		String[] args = {"Radiohead", "C:/projects/knewton/docs/Artist_lists_small.txt" };
+
 		try
 		{
 			InvertedIndex idx = new InvertedIndex();
 			
-			for (int i = 0; i < args.length; i++)
+			for (int i = 1; i < args.length; i++)
 			{
 				//System.out.println(i + ". " + args[i]);
 				idx.indexFile(new File(args[i]));
